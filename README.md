@@ -110,6 +110,7 @@ Everything lives off of /contacts/api/1.0/contacts
 # Areas for improvement
 * Right now the only fields available for a contact are name, phone, address, and email. It might be nice to allow the user to make a new contact with any field they like (minus a few protected fields, such as id and timestamps), and to allow update in a similar manner.
 * It'd be nice to have a create new user endpoint.
+* Search on multiple terms.
 
 # Acknowledgements
 Miguel Grinberg wrote a [blog post](https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask) along these very lines. I referenced that post in writing this API. I've found his other posts to be similarly well constructed.

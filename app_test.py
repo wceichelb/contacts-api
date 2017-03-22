@@ -85,6 +85,14 @@ class TestContactsApi:
         assert len(json.loads(ret.data)['contacts']) == 1
         assert json.loads(ret.data)['contacts'][0]['name'] == 'Peter Sagan'
 
+    # for now
+    def test_it_404s_if_too_many_terms_provided(self):
+        params = json.dumps(dict(terms=dict(name='Peter Sagan', phone='999')))
+        ret = self.open_with_auth('/contacts/api/1.0/contacts/search',
+                'POST', 'bomtoonen', 'password', params)
+        assert ret.status_code == 400
+
+
     # GET a contact by id
     def test_it_should_get_by_id(self):
         result = self.app.get('/contacts/api/1.0/contacts/1')

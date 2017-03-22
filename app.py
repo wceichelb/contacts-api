@@ -96,6 +96,8 @@ def delete_contact(contact_id):
 def search_contacts():
     if not request.json or not 'terms' in request.json:
         abort(400)
+    if len(request.json['terms']) > 1:
+        abort(400)
     terms = request.json['terms']
     for term in terms:
         ret = [make_contact_with_uri(c) for c in contacts if c[term] == terms[term]]
