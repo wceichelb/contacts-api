@@ -70,6 +70,12 @@ class TestContactsApi:
         expected_uri = 'http://localhost/contacts/api/1.0/contacts/1'
         assert ret['contacts'][0]['uri'] == expected_uri
 
+    def test_it_shouldnt_worry_about_unnecessary_params_or_auth(self):
+        params = json.dumps(dict(name='Caleb Ewen'))
+        result = self.open_with_auth('/contacts/api/1.0/contacts', 'GET',
+                'bomtoonen', 'password', params)
+        assert result.status_code == 200
+
     # put search on its own endpoint so it can be a POST
     def test_it_should_filter_by_term(self):
         params = json.dumps(dict(terms=dict(name='Peter Sagan')))
@@ -130,3 +136,8 @@ class TestContactsApi:
         assert json.loads(ret.data)['contact']['name'] == 'Chris Froome'
         check = self.app.get('/contacts/api/1.0/contacts')
         assert len(json.loads(check.data)['contacts']) == 1
+
+    def test_it_should_404_if_contact_not_found(self):
+        ret = self.open_with_auth('/contacts/api/1.0/contacts/42',
+                'DELETE', 'bomtoonen', 'password', params=None)
+        assert ret.status_code == 404

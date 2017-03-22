@@ -35,7 +35,7 @@ contacts = [
         ]
 
 # ROUTES
-@app.route('/contacts/api/1.0/contacts')
+@app.route('/contacts/api/1.0/contacts', methods=['GET'])
 def index_contacts():
     return jsonify({'contacts':[make_contact_with_uri(c) for c in contacts]})
 
@@ -86,9 +86,11 @@ def update_contact(contact_id):
 @app.route('/contacts/api/1.0/contacts/<int:contact_id>', methods=['DELETE'])
 @auth.login_required
 def delete_contact(contact_id):
-    contact = [c for c in contacts if c['id'] == contact_id][0]
-    contacts.remove(contact)
-    return jsonify({'contact':contact}), 201
+    contact = [c for c in contacts if c['id'] == contact_id]
+    if len(contact) == 0:
+        abort(404)
+    contacts.remove(contact[0])
+    return jsonify({'contact':contact[0]}), 201
 
 @app.route('/contacts/api/1.0/contacts/search', methods=['POST'])
 def search_contacts():
