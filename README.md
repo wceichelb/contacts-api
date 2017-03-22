@@ -21,7 +21,7 @@ Everything lives off of /contacts/api/1.0/contacts
 * Error Response
     * None. If you hit it it'll give you back the index
 * Example call
-        * `curl -i localhost:5000/contacts/api/1.0/contacts`
+    * `curl -i localhost:5000/contacts/api/1.0/contacts`
 
 ### GET `<contact_id>`
 * URL: `root/<int:contact_id>`
