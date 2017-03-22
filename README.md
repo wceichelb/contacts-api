@@ -18,11 +18,11 @@ Everything lives off of /contacts/api/1.0/contacts
 * Successful Response
     * Code: 200
     * Content: `{'contacts': [a list of contacts]}`
-    * Error Response
+* Error Response
     * None. If you hit it it'll give you back the index
-    * Example call
+* Example call
         * `curl -i localhost:5000/contacts/api/1.0/contacts`
-                     *
+
 ### GET `<contact_id>`
 * URL: `root/<int:contact_id>`
 * Method: GET
@@ -68,9 +68,9 @@ Everything lives off of /contacts/api/1.0/contacts
     * Code: 401
     * Content: `{'error': 'Unauthorized'}`
     * Code: 404
-    * Content: `{'error': 'Not Found'}` (returned if contact with `contact_id` doesn't exist
+    * Content: `{'error': 'Not Found'}` (returned if contact with `contact_id` doesn't exist)
     * Code: 405
-    * Content: `{'error': 'Not Allowed'}` (returned if user tries to updated protected field
+    * Content: `{'error': 'Not Allowed'}` (returned if user tries to updated protected field)
 * Example call
     * `curl -u user:password -i -H "Content-Type: application/json" -X POST -d '{"name":"a name"}' localhost:5000/contacts/api/1.0/contacts/1`
 * Note: requires an authenticated user
@@ -87,7 +87,7 @@ Everything lives off of /contacts/api/1.0/contacts
     * Code: 401
     * Content: `{'error': 'Unauthorized'}`
     * Code: 404
-    * Content: `{'error': 'Not Found'}` (returned if contact with `contact_id` 
+    * Content: `{'error': 'Not Found'}` (returned if contact with `contact_id` doesn't exist)
 * Example call
     * `curl -u user:password -i -H "Content-Type: application/json" -X DELETE '{"name":"a name"}' localhost:5000/contacts/api/1.0/contacts/1`
 * Note: requires an authenticated user
@@ -101,7 +101,7 @@ Everything lives off of /contacts/api/1.0/contacts
     * Code: 201
     * Content: `{'contacts': [a list of contacts]}`
     * Note: if no contacts match the terms, an empty list is returned. (Could add a flag to get 404 in this case?)
-    * Error Response
+* Error Response
     * Code: 400
     * Content: `{'error': 'Bad Request'}` (if not JSON or no `'terms'`)
 * Example call
